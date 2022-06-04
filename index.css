@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    background-color: aqua;
+}
+
+.father {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: chartreuse;
+}
+
+.son {
+    position: absolute;
+    left: 38%;
+    top: 43%;
+    display: none;
+    color: gold;
+    width: 100px;
+    height: 100px;
+    background-color: darkorange;
+}
