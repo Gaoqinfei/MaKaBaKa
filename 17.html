@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="margin-bottom: 15px;">
+        <input type="text" id="username" placeholder="请输入姓名">
+        <input type="text" id="age" placeholder="请输入性别">
+        <input type="text" id="sex" placeholder="请输入年龄">
+        <input type="button" value="提交" id="btn">
+    </div>
+    <table border="1" width="540">
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        let username = document.querySelector('#username')
+        let age = document.querySelector('#age')
+        let sex = document.querySelector('#sex')
+        let btn = document.querySelector('#btn')
+        let tbody = document.querySelector('tbody')
+        let arr = []
+        if (localStorage.getItem('table')) {
+            let str = JSON.parse(localStorage.getItem('table'))
+            arr = str
+        }
+
+        load()
+        btn.addEventListener('click', function () {
+            if (username.value === '' && age.value === '' && sex.value === '') {
+                alert('输入为空')
+            } else {
+                arr.push({ age: age.value, sex: sex.value, uname: username.value })
+                load()
+                saveDate()
+                username.value = ''
+                age.value = ''
+                sex.value = ''
+            }
+        })
+
+        tbody.addEventListener('click', function (e) {
+            if (e.target.nodeName === 'A') {
+                // console.log(1);
+                let index = e.target.parentNode.parentNode.getAttribute('index')
+                console.log(index);
+                arr.splice(index, 1)
+                load()
+                saveDate()
+            }
+        })
+
+        function load() {
+            tbody.innerHTML = ''
+            for (let i = 0; i < arr.length; i++) {
+                let tr = document.createElement('tr')
+                tr.setAttribute('index', i)
+                tr.innerHTML = `
+                 <td>${arr[i].uname}</td>
+                 <td>${arr[i].sex}</td>
+                 <td>${arr[i].age}</td>
+                 <td><a href="Javascript:;">删除</a></td>
+                `
+                tbody.appendChild(tr)
+            }
+        }
+
+        function saveDate() {
+            let str = JSON.stringify(arr)
+            localStorage.setItem('table', str)
+        }
+
+
+
+    </script>
+</body>
+
+</html>

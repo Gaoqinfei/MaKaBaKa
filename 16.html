@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let str = '85872637471533203552943982'
+        let obj = {}
+        for (let i = 0; i < str.length; i++) {
+            let e = str[i]
+            if (obj[e]) {
+                obj[e]++
+            } else {
+                obj[e] = 1
+            }
+        }
+        let max = 0
+        let cishu = ''
+        for (let k in obj) {
+            if (obj[k] > max) {
+                max = obj[k]
+                cishu = k
+            }
+        }
+        console.log('出现最多的数字是' + cishu + "出现了" + max + "次");
+
+        let newstr = ''
+        for (let i = 0; i < str.length; i++) {
+            if (newstr.indexOf(str[i]) == -1) {
+                newstr += str[i]
+            }
+        }
+        console.log(newstr);
+
+        let arr = newstr.split("")
+
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    let temp = arr[j]
+                    arr[j] = arr[j + 1]
+                    arr[j + 1] = temp
+                }
+            }
+        }
+        console.log(arr.join(""));
+    </script>
+</body>
+
+</html>
